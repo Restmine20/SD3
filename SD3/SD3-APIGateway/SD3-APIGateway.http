@@ -1,0 +1,6 @@
+@SD3_APIGateway_HostAddress = http://localhost:5275
+
+GET {{SD3_APIGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

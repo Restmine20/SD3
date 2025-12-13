@@ -1,0 +1,57 @@
+﻿services:
+  # Общий контейнер PostgreSQL
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: filestorage  # ← Общая БД для обоих сервисов
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # File Storing Service
+  file-storing:
+    build:
+      context: .
+      dockerfile: SD3-FileStoringService/Dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db
+    volumes:
+      - file-uploads:/app/uploads
+
+  # File Analysis Service
+  file-analysis:
+    build:
+      context: .
+      dockerfile: SD3-FileAnalysisService/Dockerfile
+    ports:
+      - "8082:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - db  # ← Подключается к той же БД
+    volumes:
+      - analysis-reports:/app/reports
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: SD3-APIGateway/Dockerfile
+    ports:
+      - "8080:8080"  # ← Основной порт для клиентов
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - file-storing
+      - file-analysis
+volumes:
+  pgdata:          # ← Общий volume для БД
+  file-uploads:
+  analysis-reports:
