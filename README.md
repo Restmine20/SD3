@@ -225,9 +225,8 @@ SD3/
 1. Клонируйте репозиторий и перейдите в директорию проекта:
 
 ~~~
-git clone https://github.com/Restmine20/SD3.git
-cd SD3
-git checkout v2
+git clone https://github.com/Restmine20/Anti-plagiarism-system
+cd Anti-plagiarism-system
 ~~~
 
 2. Запустите все сервисы:
