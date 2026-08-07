@@ -1,6 +1,0 @@
-@SD3_FileAnalysisService_HostAddress = http://localhost:5243
-
-GET {{SD3_FileAnalysisService_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
