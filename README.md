@@ -129,7 +129,7 @@ API Gateway не содержит бизнес-логики и не работа
 
 
 ```text
-SD3/
+Anti-plagiarism-system/
 ├── SD3-APIGateway/ # Сервис-посредник
 │ ├── Controllers/
 │ │         └── GatewayController.cs # Маршрутизация запросов к микросервисам
